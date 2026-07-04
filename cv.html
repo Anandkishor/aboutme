@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CV — Anand Kishor Verma</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy:#1A3A5C;--navy-mid:#2C5282;--navy-lt:#4A7BA7;--navy-bg:#EBF2F9;
+  --peach:#FFBF9B;--peach-dk:#E8955A;--peach-bg:#FFF5EE;--peach-bd:rgba(255,191,155,.35);
+  --sky:#7EC8E3;--sky-bg:#EBF7FC;
+  --paper:#F8F6F3;--white:#FFFFFF;--rule:#E2DDD8;--panel:#F0EDE8;
+  --ink:#1C2B3A;--ink2:#3A4F63;--ink3:#6B7E8F;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Inter',system-ui,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;padding:2.5rem 1.5rem 5rem;display:flex;flex-direction:column;align-items:center}
+
+.controls{width:100%;max-width:960px;display:flex;justify-content:space-between;align-items:center;margin-bottom:1.75rem}
+.ctrl-brand{font-family:var(--serif);font-size:1rem;color:var(--navy);font-weight:600}
+.ctrl-brand span{color:var(--peach-dk);font-style:italic;font-weight:400}
+.print-btn{display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:#fff;padding:8px 18px;border-radius:50px;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;border:none;cursor:pointer;transition:background .18s}
+.print-btn:hover{background:var(--peach-dk)}
+
+/* CV CARD */
+.cv{width:100%;max-width:960px;background:var(--white);border-radius:14px;overflow:hidden;box-shadow:0 8px 48px rgba(26,58,92,.12);border:1px solid var(--rule)}
+
+/* HEAD — navy band */
+.cv-head{background:var(--navy);padding:2rem 2.4rem;position:relative;overflow:hidden}
+.cv-head::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(255,191,155,.1) 0%,transparent 70%);border-radius:50%}
+.cv-head::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--peach-dk),var(--peach),rgba(255,191,155,0) 70%)}
+.cv-head-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:start}
+.cv-name{font-family:var(--serif);font-size:2rem;color:#fff;letter-spacing:-.03em;line-height:1.05;margin-bottom:.3rem;font-weight:700}
+.cv-title{font-family:var(--mono);font-size:.57rem;letter-spacing:.18em;text-transform:uppercase;color:var(--peach);margin-bottom:.8rem}
+.cv-tagline{font-size:.82rem;color:rgba(255,255,255,.55);max-width:460px;line-height:1.65}
+.cv-contact{text-align:right;display:flex;flex-direction:column;gap:3px}
+.cv-contact a,.cv-contact span{font-family:var(--mono);font-size:.58rem;letter-spacing:.05em;color:rgba(255,255,255,.45);display:block}
+.cv-contact a{color:var(--peach);transition:color .15s}
+.cv-contact a:hover{color:#fff}
+
+/* BADGES */
+.cv-badges{padding:.8rem 2.4rem;background:var(--navy-bg);border-bottom:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:5px}
+.cvb{font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:50px;border:1px solid var(--rule);color:var(--ink2);background:var(--white)}
+.cvb.p{background:var(--peach-bg);border-color:var(--peach-bd);color:var(--peach-dk)}
+.cvb.n{background:var(--navy-bg);border-color:rgba(26,58,92,.2);color:var(--navy)}
+
+/* BODY LAYOUT */
+.cv-body{display:grid;grid-template-columns:1fr 258px}
+.cv-main{padding:1.8rem 2rem 2rem;border-right:1px solid var(--rule)}
+.cv-side{padding:1.6rem 1.6rem 2rem;background:var(--panel)}
+
+/* section label */
+.slbl{display:flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--peach-dk);margin-bottom:.9rem;margin-top:1.6rem}
+.slbl:first-child{margin-top:0}
+.slbl::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--peach-bd),transparent)}
+
+/* experience */
+.xp{margin-bottom:1.4rem;position:relative;padding-left:1rem}
+.xp::before{content:'';position:absolute;left:0;top:6px;width:3px;height:3px;border-radius:50%;background:var(--peach-dk)}
+.xp:last-child{margin-bottom:0}
+.xp-hd{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.3rem;margin-bottom:2px}
+.xp-org{font-family:var(--serif);font-size:.97rem;color:var(--navy);letter-spacing:-.01em;font-weight:600}
+.xp-period{font-family:var(--mono);font-size:.55rem;color:var(--ink3);letter-spacing:.07em}
+.xp-role{font-size:.75rem;color:var(--peach-dk);font-style:italic;margin-bottom:.45rem}
+.xp-pts{display:flex;flex-direction:column;gap:3px}
+.xp-pts li{font-size:.75rem;color:var(--ink2);padding-left:.85rem;position:relative;line-height:1.55}
+.xp-pts li::before{content:'·';position:absolute;left:0;color:var(--peach-dk);font-size:1rem;line-height:1.2}
+.xp-pts li strong{color:var(--navy);font-weight:500}
+
+/* projects */
+.proj-mini{margin-bottom:.45rem;padding-left:.85rem;position:relative}
+.proj-mini::before{content:'·';position:absolute;left:0;color:var(--peach-dk);font-size:1rem;line-height:1.2}
+.proj-mini-name{font-size:.75rem;font-weight:500;color:var(--navy)}
+.proj-mini-desc{font-size:.72rem;color:var(--ink3);line-height:1.45}
+
+/* publications */
+.pub{margin-bottom:.8rem;padding-bottom:.8rem;border-bottom:1px solid var(--rule)}
+.pub:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.pub-title{font-size:.75rem;font-weight:500;color:var(--ink);line-height:1.4;margin-bottom:2px}
+.pub-venue{font-family:var(--mono);font-size:.55rem;color:var(--ink3);line-height:1.4}
+.pub-doi{font-family:var(--mono);font-size:.52rem;color:var(--navy-lt)}
+
+/* side: education */
+.edu{margin-bottom:.85rem}
+.edu:last-child{margin-bottom:0}
+.edu-deg{font-size:.8rem;font-weight:500;color:var(--ink);margin-bottom:1px}
+.edu-inst{font-family:var(--mono);font-size:.57rem;color:var(--ink3);letter-spacing:.03em}
+.edu-yr{font-family:var(--mono);font-size:.54rem;color:var(--peach-dk)}
+
+/* side: skills */
+.scat{margin-bottom:1rem}
+.scat:last-child{margin-bottom:0}
+.scat-name{font-family:var(--mono);font-size:.54rem;letter-spacing:.15em;text-transform:uppercase;color:var(--peach-dk);margin-bottom:.4rem}
+.stags{display:flex;flex-wrap:wrap;gap:4px}
+.stag{font-size:.7rem;padding:2px 8px;border-radius:50px;background:var(--white);border:1px solid var(--rule);color:var(--ink2)}
+
+/* side: achievements */
+.ach-item{display:flex;gap:.5rem;margin-bottom:.75rem;align-items:flex-start}
+.ach-item:last-child{margin-bottom:0}
+.ach-ico{font-size:.82rem;flex-shrink:0;margin-top:1px}
+.ach-txt{font-size:.72rem;color:var(--ink2);line-height:1.5}
+.ach-txt strong{color:var(--navy);display:block;font-weight:500;margin-bottom:1px;font-size:.73rem}
+
+/* footer */
+.cv-foot{padding:.85rem 2.4rem;background:var(--navy-bg);border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center}
+.cv-foot p{font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase}
+.cv-foot span{color:var(--peach-dk)}
+
+@media print{
+  body{background:#fff;padding:0}
+  .controls{display:none}
+  .cv{border:none;border-radius:0;box-shadow:none;max-width:100%}
+  .cv-head::after{display:none}
+  @page{margin:1.2cm 1.4cm;size:A4}
+}
+@media(max-width:700px){
+  .cv-head-inner{grid-template-columns:1fr}
+  .cv-contact{text-align:left}
+  .cv-body{grid-template-columns:1fr}
+  .cv-main{border-right:none;border-bottom:1px solid var(--rule)}
+}
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <div class="ctrl-brand">Anand Kishor Verma <span>/ CV</span></div>
+  <button class="print-btn" onclick="window.print()">
+    <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="2" y="5" width="10" height="7" rx="1" stroke="currentColor" stroke-width="1.4"/><path d="M4 5V2h6v3M4 10h6" stroke="currentColor" stroke-width="1.4"/></svg>
+    Print / Save PDF
+  </button>
+</div>
+
+<div class="cv">
+
+  <div class="cv-head">
+    <div class="cv-head-inner">
+      <div>
+        <h1 class="cv-name">Anand Kishor Verma</h1>
+        <p class="cv-title">Maker Educator · Makerspace Lead · Fab Lab Expert</p>
+        <p class="cv-tagline">6+ years designing and running hands-on maker education — Arduino, robotics, 3D printing, laser cutting, CNC — across India's top institutional Fab Labs. 500+ students trained. 20+ startups mentored.</p>
+      </div>
+      <div class="cv-contact">
+        <a href="mailto:anand.verma.msbe24@anu.edu.in">anand.verma.msbe24@anu.edu.in</a>
+        <span>+91-9035756213</span>
+        <span>Ahmedabad, India</span>
+        <a href="https://linkedin.com/in/anandkishorverma" target="_blank">linkedin.com/in/anandkishorverma</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-badges">
+    <span class="cvb p">AIM Mentor of Change</span>
+    <span class="cvb p">MakerFaire Recognized</span>
+    <span class="cvb n">Arduino · Robotics · 3D Printing</span>
+    <span class="cvb n">Laser Cutting · CNC · Electronics</span>
+    <span class="cvb">Curriculum Design</span>
+    <span class="cvb">Fab Lab Management</span>
+    <span class="cvb">Startup Mentorship</span>
+  </div>
+
+  <div class="cv-body">
+    <div class="cv-main">
+
+      <p class="slbl">Experience</p>
+
+      <div class="xp">
+        <div class="xp-hd"><span class="xp-org">Plaksha University</span><span class="xp-period">Nov 2021 — Nov 2024 · Mohali</span></div>
+        <p class="xp-role">Senior Makerspace Facilitator</p>
+        <ul class="xp-pts">
+          <li>Founded and operationalized a <strong>5,000+ sq. ft Makerspace</strong> — procurement, SOPs, 50+ machines, ₹5 Cr budget.</li>
+          <li>Designed and delivered <strong>Arduino, RPi, electronics, robotics, 3D printing</strong>, laser cutting, and 3D scanning curricula.</li>
+          <li>Trained <strong>500+ students and 50+ faculty</strong> in hands-on fabrication and digital making.</li>
+          <li>Mentored <strong>100+ students</strong> through Grand Challenge and ILGC innovation programs.</li>
+          <li>Led <strong>20+ outreach programs</strong> and school visits impacting 1,000+ students.</li>
+        </ul>
+      </div>
+
+      <div class="xp">
+        <div class="xp-hd"><span class="xp-org">CMR University</span><span class="xp-period">Mar 2017 — Apr 2019 · Bangalore</span></div>
+        <p class="xp-role">Makerspace Facilitator — FabLab@CMRIT</p>
+        <ul class="xp-pts">
+          <li>Launched <strong>Young Undergraduate Engineer Maker Program</strong> — <strong>2,000+ students/year.</strong></li>
+          <li>Designed Arduino, 3D printing, CNC, laser cutting curricula for 500+ students and 50+ faculty.</li>
+          <li>Built Maker startup ecosystem: mentored <strong>20+ startups;</strong> one on <strong>Shark Tank India S2.</strong></li>
+          <li>Organized Bangalore Design Week, Maker Something — <strong>1,000+ participants.</strong></li>
+        </ul>
+      </div>
+
+      <div class="xp">
+        <div class="xp-hd"><span class="xp-org">Agastya International Foundation</span><span class="xp-period">Jul 2015 — Apr 2016 · Kuppam</span></div>
+        <p class="xp-role">Mentor / Facilitator — Innovation Hub</p>
+        <ul class="xp-pts">
+          <li>3D printing, CNC, and laser cutting curriculum for <strong>grades 6–10 rural students,</strong> ~40/batch.</li>
+          <li>Designed Design Studio @ Innovation Hub — workflows, Fab Lab approval documentation.</li>
+        </ul>
+      </div>
+
+      <p class="slbl">Key Projects</p>
+
+      <div class="proj-mini"><p class="proj-mini-name">GSLV &amp; PSLV Scale Models (1:300)</p><p class="proj-mini-desc">Modified open-source 3D designs; printed for education and demonstration.</p></div>
+      <div class="proj-mini"><p class="proj-mini-name">UGV — Unmanned Ground Vehicle</p><p class="proj-mini-desc">Arduino/RPi-powered autonomous robot with sensors and motor control.</p></div>
+      <div class="proj-mini"><p class="proj-mini-name">Eiffel Tower Model (2ft, MDF)</p><p class="proj-mini-desc">CAD-designed, laser-cut structural replica — structural detail and tolerances.</p></div>
+      <div class="proj-mini"><p class="proj-mini-name">Hovercraft Prototype</p><p class="proj-mini-desc">CAD + 3D-printed air-cushion vehicle demonstrating propulsion mechanics.</p></div>
+      <div class="proj-mini"><p class="proj-mini-name">RC Aircraft Prototype</p><p class="proj-mini-desc">Designed, built, and flight-tested; integrates aerodynamics and electronics.</p></div>
+      <div class="proj-mini"><p class="proj-mini-name">BWB MAV (Research · Published)</p><p class="proj-mini-desc">Blended Wing Body Micro Air Vehicle; published IOP Conf. Ser. 2018 &amp; ICRAMAV 2014.</p></div>
+
+      <p class="slbl">Publications</p>
+
+      <div class="pub">
+        <p class="pub-title">Challenge and Advantage of Materials in Design and Fabrication of Composite UAV</p>
+        <p class="pub-venue">IOP Conf. Ser.: Materials Science and Engineering, Vol. 455, 012005 · 2018</p>
+        <span class="pub-doi">doi.org/10.1088/1757-899X/455/1/012005</span>
+      </div>
+      <div class="pub">
+        <p class="pub-title">Design and Fabrication of BWB MAV</p>
+        <p class="pub-venue">ICRAMAV, JNT University Hyderabad · ISBN: 9789351071693 · 2014</p>
+      </div>
+      <div class="pub">
+        <p class="pub-title">Design and Fabrication of BWB</p>
+        <p class="pub-venue">ISC2015 Proceedings, Amity University Press · ISBN: 978-81-8011-2232</p>
+      </div>
+
+    </div>
+
+    <div class="cv-side">
+
+      <p class="slbl" style="margin-top:0">Education</p>
+      <div class="edu"><p class="edu-deg">M.Sc. Built Environment &amp; Sustainability</p><p class="edu-inst">Anant National University, Ahmedabad</p><p class="edu-yr">Nov 2025</p></div>
+      <div class="edu"><p class="edu-deg">PG Diploma Program</p><p class="edu-inst">Anant National University, Ahmedabad</p><p class="edu-yr">June 2022</p></div>
+      <div class="edu"><p class="edu-deg">B.Tech — Aerospace Engineering</p><p class="edu-inst">Siddhartha Institute, Bangalore</p><p class="edu-yr">June 2016</p></div>
+      <div class="edu"><p class="edu-deg">FAB Academy</p><p class="edu-inst">Fab Lab Zero @ Vigyan Ashram, Pune</p><p class="edu-yr">2019 (attended)</p></div>
+
+      <p class="slbl">Technical Skills</p>
+      <div class="scat"><p class="scat-name">Electronics &amp; Robotics</p><div class="stags"><span class="stag">Arduino</span><span class="stag">Raspberry Pi</span><span class="stag">Robotics</span><span class="stag">Sensors</span><span class="stag">Motor Control</span></div></div>
+      <div class="scat"><p class="scat-name">Fabrication</p><div class="stags"><span class="stag">3D Printing</span><span class="stag">Laser Cutting</span><span class="stag">CNC Router</span><span class="stag">3D Scanning</span><span class="stag">CAD</span></div></div>
+      <div class="scat"><p class="scat-name">Code &amp; Tools</p><div class="stags"><span class="stag">Python</span><span class="stag">Processing</span><span class="stag">HTML/CSS</span><span class="stag">IoT</span><span class="stag">AI/ML basics</span></div></div>
+      <div class="scat"><p class="scat-name">Teaching Design</p><div class="stags"><span class="stag">Curriculum Design</span><span class="stag">Project Kits</span><span class="stag">SOPs</span><span class="stag">Design Thinking</span></div></div>
+
+      <p class="slbl">Achievements</p>
+      <div class="ach-item"><span class="ach-ico">🏆</span><div class="ach-txt"><strong>Mentor of Change — AIM, NITI Aayog</strong>Atal Innovation Mission, Govt. of India · Since 2018</div></div>
+      <div class="ach-item"><span class="ach-ico">🚀</span><div class="ach-txt"><strong>Recognized Maker — MakerFaire</strong>Exhibitor and participant at MakerFaire events</div></div>
+      <div class="ach-item"><span class="ach-ico">💡</span><div class="ach-txt"><strong>NASSCOM Tech-Maker Under 50</strong>Innovation and maker contributions</div></div>
+      <div class="ach-item"><span class="ach-ico">🛰️</span><div class="ach-txt"><strong>NASA Scientist Appreciation</strong>Space Festival, Bharathiar University</div></div>
+      <div class="ach-item"><span class="ach-ico">📺</span><div class="ach-txt"><strong>Shark Tank India S2</strong>Prototyping mentor for featured alumni startup</div></div>
+
+    </div>
+  </div>
+
+  <div class="cv-foot">
+    <p>Anand Kishor Verma <span>/</span> Maker Educator <span>/</span> June 2025</p>
+    <p>Print or Ctrl+P → <span>Save as PDF</span></p>
+  </div>
+
+</div>
+</body>
+</html>

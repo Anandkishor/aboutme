@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Cover Letter — Anand Kishor Verma</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy:#1A3A5C; --navy-mid:#2C5282; --navy-lt:#4A7BA7; --navy-bg:#EBF2F9;
+  --peach:#FFBF9B; --peach-dk:#E8955A; --peach-bg:#FFF5EE; --peach-bd:rgba(255,191,155,.35);
+  --sky:#7EC8E3; --sky-bg:#EBF7FC;
+  --paper:#F8F6F3; --white:#FFFFFF; --rule:#E2DDD8;
+  --ink:#1C2B3A; --ink2:#3A4F63; --ink3:#6B7E8F;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Inter',system-ui,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:3rem 1.5rem 5rem}
+
+.topbar{width:100%;max-width:760px;display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem}
+.topbar-brand{font-family:var(--serif);font-size:1rem;color:var(--navy);font-weight:600}
+.topbar-brand span{color:var(--peach-dk);font-weight:400;font-style:italic}
+.print-btn{display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:#fff;padding:8px 18px;border-radius:50px;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;border:none;cursor:pointer;transition:background .18s}
+.print-btn:hover{background:var(--peach-dk)}
+
+.letter{width:100%;max-width:760px;background:var(--white);border:1px solid var(--rule);border-radius:14px;overflow:hidden;box-shadow:0 8px 40px rgba(26,58,92,.1)}
+
+/* header band */
+.lh{background:var(--navy);padding:2.2rem 2.8rem;position:relative;overflow:hidden}
+.lh::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(255,191,155,.12) 0%,transparent 70%);border-radius:50%}
+.lh::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--peach-dk),var(--peach),rgba(255,191,155,0))}
+.lh-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;align-items:start;gap:1.5rem}
+.lh-name{font-family:var(--serif);font-size:1.9rem;color:#fff;letter-spacing:-.02em;line-height:1.1;margin-bottom:.3rem;font-weight:700}
+.lh-title{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--peach)}
+.lh-contact{text-align:right}
+.lh-contact p{font-family:var(--mono);font-size:.6rem;letter-spacing:.05em;color:rgba(255,255,255,.5);line-height:1.8}
+.lh-contact a{color:var(--peach);transition:color .15s}
+.lh-contact a:hover{color:#fff}
+
+/* body */
+.lb{padding:2.4rem 2.8rem}
+.date-line{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase;margin-bottom:1.8rem}
+.to-block{margin-bottom:1.8rem;padding-bottom:1.8rem;border-bottom:1px solid var(--rule)}
+.to-block p{font-size:.87rem;color:var(--ink2);line-height:1.75}
+.to-block strong{color:var(--navy);font-weight:600}
+
+/* subject tag */
+.subject-tag{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--peach-dk);background:var(--peach-bg);border:1px solid var(--peach-bd);padding:6px 14px;border-radius:6px;margin-bottom:2rem}
+.subject-tag::before{content:'Re:';color:var(--peach-dk);opacity:.5}
+
+/* paragraphs */
+.lbody p{font-size:.93rem;color:var(--ink2);line-height:1.88;margin-bottom:1.2rem}
+.lbody p:last-child{margin-bottom:0}
+.lbody strong{color:var(--navy);font-weight:600}
+.lbody em{font-style:italic;color:var(--peach-dk)}
+
+/* callout */
+.callout{background:var(--navy-bg);border-left:3px solid var(--navy);border-radius:0 8px 8px 0;padding:1.1rem 1.4rem;margin:1.6rem 0}
+.callout p{font-size:.87rem;color:var(--ink2);line-height:1.75;margin:0}
+.callout p+p{margin-top:.6rem}
+.callout strong{color:var(--navy);font-weight:600}
+
+/* highlight strip */
+.highlight-strip{background:var(--peach-bg);border:1px solid var(--peach-bd);border-radius:8px;padding:1rem 1.4rem;margin:1.4rem 0;display:flex;align-items:flex-start;gap:.75rem}
+.hs-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px}
+.hs-text{font-size:.85rem;color:var(--ink2);line-height:1.7}
+.hs-text strong{color:var(--peach-dk);font-weight:600}
+
+/* sign-off */
+.signoff{margin-top:2.2rem;padding-top:1.8rem;border-top:1px solid var(--rule)}
+.signoff p{font-size:.88rem;color:var(--ink2);margin-bottom:.4rem}
+.sig-name{font-family:var(--serif);font-size:1.6rem;color:var(--navy);letter-spacing:-.02em;margin-top:1rem;margin-bottom:.2rem;font-weight:700}
+.sig-sub{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+
+/* footer */
+.lfoot{padding:1.1rem 2.8rem;background:var(--navy-bg);border-top:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between}
+.lfoot p{font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase}
+.lfoot span{color:var(--peach-dk)}
+
+@media print{
+  body{background:#fff;padding:0}
+  .topbar,.print-btn{display:none}
+  .letter{border:none;border-radius:0;box-shadow:none;max-width:100%}
+  @page{margin:1.5cm 2cm}
+}
+@media(max-width:600px){
+  .lh,.lb,.lfoot{padding:1.6rem 1.4rem}
+  .lh-inner{grid-template-columns:1fr}
+  .lh-contact{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">Anand Kishor Verma <span>/ Cover Letter</span></div>
+  <button class="print-btn" onclick="window.print()">
+    <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="2" y="5" width="10" height="7" rx="1" stroke="currentColor" stroke-width="1.4"/><path d="M4 5V2h6v3M4 10h6" stroke="currentColor" stroke-width="1.4"/></svg>
+    Print / Save PDF
+  </button>
+</div>
+
+<div class="letter">
+  <div class="lh">
+    <div class="lh-inner">
+      <div>
+        <h1 class="lh-name">Anand Kishor Verma</h1>
+        <p class="lh-title">Maker Educator · Makerspace Lead · Fab Lab Expert</p>
+      </div>
+      <div class="lh-contact">
+        <p>+91-9035756213</p>
+        <p><a href="mailto:anand.verma.msbe24@anu.edu.in">anand.verma.msbe24@anu.edu.in</a></p>
+        <p>Ahmedabad, India</p>
+        <p><a href="https://linkedin.com/in/anandkishorverma" target="_blank">linkedin.com/in/anandkishorverma</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="lb">
+    <p class="date-line">June 2025</p>
+
+    <div class="to-block">
+      <p><strong>The Hiring Team</strong><br/>
+      Masters' Union School of Business<br/>
+      Gurugram, Haryana, India</p>
+    </div>
+
+    <div class="subject-tag">Maker Educator — Makerspace, Masters' Union</div>
+
+    <div class="lbody">
+      <p>I am writing to apply for the <strong>Maker Educator</strong> role at Masters' Union. You are looking for someone who can design and deliver immersive maker workshops, guide students from concept to working prototype, and help run what you describe as <em>Gurgaon's premier makerspace.</em> That is precisely what I have been doing — at scale — for the past six years.</p>
+
+      <div class="callout">
+        <p><strong>At Plaksha University (2021–2024)</strong>, I founded and operationalized a 5,000+ sq. ft Makerspace from scratch — procuring 50+ machines, writing all SOPs, managing a ₹5 Cr budget, and training 500+ students and 50+ faculty in Arduino, Raspberry Pi, electronics, robotics, 3D printing, and laser cutting.</p>
+        <p><strong>At CMR University (2017–2019)</strong>, I launched the Young Undergraduate Engineer Maker Program, reaching 2,000+ students annually. I built a maker-startup ecosystem that mentored 20+ ventures — one of which was later featured on <strong>Shark Tank India Season 2.</strong> Masters' Union has its own Shark Tank alumni. I understand that world.</p>
+      </div>
+
+      <p>Across both institutions I have designed end-to-end curricula, project kits, instructional guides, and SOPs — exactly the deliverables your JD specifies. My teaching philosophy is simple: <strong>students learn by making,</strong> not by watching. Every workshop I design puts tools in students' hands within the first fifteen minutes.</p>
+
+      <div class="highlight-strip">
+        <span class="hs-icon">🚀</span>
+        <p class="hs-text">I am also a recognized <strong>Maker at MakerFaire</strong> and a <strong>Mentor of Change</strong> designated by Atal Innovation Mission, NITI Aayog — affiliations that reflect a commitment to maker culture extending well beyond the lab.</p>
+      </div>
+
+      <p>What excites me most about Masters' Union is the deliberate integration of industry-led learning, startup infrastructure, and world-class facilities — including your PwC Generative AI Center, Bloomberg Lab, and advanced robotics and bioengineering workshops. This is not a makerspace bolted onto a university. It is central to the institution's identity, and that is exactly the environment where maker education produces its best results.</p>
+
+      <p>I would welcome the opportunity to walk your team through specific programs I have designed, the machines I have run, and the student outcomes I have achieved. I am open to relocating to Gurugram and available at short notice for a conversation, demo session, or lab visit.</p>
+
+      <p>Thank you sincerely for your time and consideration.</p>
+    </div>
+
+    <div class="signoff">
+      <p>Warm regards,</p>
+      <p class="sig-name">Anand Kishor Verma</p>
+      <p class="sig-sub">Senior Makerspace Facilitator · MakerFaire Maker · AIM Mentor of Change</p>
+    </div>
+  </div>
+
+  <div class="lfoot">
+    <p>Anand Kishor Verma <span>/</span> Cover Letter <span>/</span> Maker Educator — Masters' Union</p>
+    <p>Ctrl+P → <span>Save as PDF</span></p>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Anand Kishor Verma — Maker Educator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TOKENS  — Midnight Blue + Peach
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+:root{
+  /* base */
+  --paper:    #F8F6F3;
+  --white:    #FFFFFF;
+  --panel:    #F0EDE8;
+  --rule:     #E2DDD8;
+
+  /* midnight blue family */
+  --navy:     #1A3A5C;
+  --navy-mid: #2C5282;
+  --navy-lt:  #4A7BA7;
+  --navy-bg:  #EBF2F9;
+  --navy-dim: rgba(26,58,92,0.08);
+
+  /* peach family */
+  --peach:    #FFBF9B;
+  --peach-dk: #E8955A;
+  --peach-bg: #FFF5EE;
+  --peach-bd: rgba(255,191,155,0.4);
+
+  /* sky accent (light teal-blue for tags/code) */
+  --sky:      #7EC8E3;
+  --sky-bg:   #EBF7FC;
+
+  /* type */
+  --ink:      #1C2B3A;
+  --ink2:     #3A4F63;
+  --ink3:     #6B7E8F;
+
+  --serif:  'Playfair Display',Georgia,serif;
+  --sans:   'Inter',system-ui,sans-serif;
+  --mono:   'JetBrains Mono',monospace;
+
+  --r:6px; --ease:cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+/* ━━ RESET ━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block} a{color:inherit;text-decoration:none} ul{list-style:none}
+
+/* ━━ SCROLL PROGRESS (improvement 1) ━━ */
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--peach),var(--navy));width:0%;z-index:999;transition:width .1s linear}
+
+/* ━━ DOWNLOAD DOCK ━━━━━━━━━━━━━━━━━━ */
+.dock{position:fixed;bottom:28px;right:24px;z-index:900;display:flex;flex-direction:column;gap:7px;align-items:flex-end}
+.dock-lbl{font-family:var(--mono);font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);margin-bottom:2px}
+.dpill{display:inline-flex;align-items:center;gap:7px;padding:8px 15px 8px 11px;border-radius:50px;font-family:var(--mono);font-size:.64rem;font-weight:500;letter-spacing:.04em;cursor:pointer;box-shadow:0 2px 16px rgba(26,58,92,.15);transition:transform .18s var(--ease),box-shadow .18s var(--ease);text-decoration:none;white-space:nowrap;border:none}
+.dpill:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(26,58,92,.22)}
+.dpill.cv{background:var(--navy);color:#fff}
+.dpill.cl{background:var(--peach-dk);color:#fff}
+.dpill.pt{background:var(--white);color:var(--navy);border:1.5px solid var(--navy-bg)}
+
+/* ━━ NAV ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+nav{position:sticky;top:0;z-index:200;height:56px;background:rgba(248,246,243,.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,4rem)}
+.nav-brand{display:flex;align-items:center;gap:.6rem}
+.nav-name{font-family:var(--serif);font-size:1.05rem;color:var(--navy);letter-spacing:-.01em;font-weight:600}
+.nav-dot{width:6px;height:6px;background:var(--peach-dk);border-radius:50%}
+.nav-tag{font-family:var(--mono);font-size:.56rem;color:var(--ink3);letter-spacing:.1em;border:1px solid var(--rule);padding:2px 8px;border-radius:50px}
+/* hamburger (improvement 8) */
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-menu{display:flex;gap:2px}
+.nav-menu a{font-size:.78rem;font-weight:500;color:var(--ink3);padding:5px 11px;border-radius:50px;transition:background .15s,color .15s}
+.nav-menu a:hover,.nav-menu a.on{background:var(--peach-bg);color:var(--peach-dk)}
+.hamburger{display:none;flex-direction:column;gap:4px;padding:6px;cursor:pointer;border:none;background:transparent}
+.hamburger span{display:block;width:20px;height:2px;background:var(--navy);border-radius:2px;transition:all .25s}
+.mob-menu{display:none;position:fixed;top:56px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--rule);padding:1rem;z-index:199;flex-direction:column;gap:4px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.mob-menu a{font-size:.9rem;font-weight:500;color:var(--ink2);padding:10px 14px;border-radius:var(--r);display:block;transition:background .15s,color .15s}
+.mob-menu a:hover{background:var(--peach-bg);color:var(--peach-dk)}
+.mob-menu.open{display:flex}
+
+/* ━━ SECTIONS ━━━━━━━━━━━━━━━━━━━━━━━ */
+.sec{padding:clamp(60px,8vw,100px) clamp(1.5rem,5vw,4rem)}
+.sec.panel{background:var(--panel)}
+.sec.white{background:var(--white)}
+.sec.navy{background:var(--navy)}
+.wrap{max-width:1100px;margin:0 auto}
+
+/* ━━ EYEBROW ━━━━━━━━━━━━━━━━━━━━━━━━ */
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--peach-dk);margin-bottom:1.4rem}
+.eyebrow::before,.eyebrow::after{content:'';display:block;height:1.5px;background:var(--peach-dk);width:20px;opacity:.5}
+.eyebrow.lt{color:var(--peach);} .eyebrow.lt::before,.eyebrow.lt::after{background:var(--peach)}
+
+.display{font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);font-weight:400;line-height:1.12;letter-spacing:-.02em;color:var(--ink)}
+.display em{font-style:italic;color:var(--navy)}
+.display.lt{color:#fff} .display.lt em{color:var(--peach)}
+
+/* ━━ HERO ━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#hero{background:var(--white);padding:clamp(56px,8vw,96px) clamp(1.5rem,5vw,4rem);border-bottom:1px solid var(--rule);position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(26,58,92,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(26,58,92,.03) 1px,transparent 1px);background-size:44px 44px;pointer-events:none}
+/* soft peach blob */
+#hero::after{content:'';position:absolute;top:-80px;right:-80px;width:500px;height:500px;background:radial-gradient(circle,rgba(255,191,155,.18) 0%,transparent 70%);pointer-events:none;border-radius:50%}
+.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:clamp(2rem,5vw,5rem);align-items:center;position:relative;z-index:1}
+
+.hero-kicker{display:inline-flex;align-items:center;gap:8px;background:var(--peach-bg);border:1px solid var(--peach-bd);color:var(--peach-dk);font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;padding:5px 12px;border-radius:50px;margin-bottom:1.5rem}
+.kicker-dot{width:6px;height:6px;background:var(--peach-dk);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
+
+.hero-h1{font-family:var(--serif);font-size:clamp(2.8rem,5.5vw,4.8rem);font-weight:700;line-height:1.04;letter-spacing:-.03em;color:var(--navy);margin-bottom:1.2rem}
+.hero-h1 em{font-style:italic;color:var(--peach-dk);font-weight:400}
+
+.hero-sub{font-size:.96rem;color:var(--ink3);max-width:440px;line-height:1.8;margin-bottom:2rem}
+
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:2.2rem}
+.hchip{font-family:var(--mono);font-size:.62rem;padding:4px 11px;border-radius:50px;border:1px solid var(--rule);color:var(--ink2);background:var(--paper);transition:all .15s}
+.hchip:hover{border-color:var(--navy);color:var(--navy)}
+.hchip.p{background:var(--peach-bg);border-color:var(--peach-bd);color:var(--peach-dk)}
+.hchip.s{background:var(--sky-bg);border-color:rgba(126,200,227,.4);color:#2A7B9B}
+
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn-solid{display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:#fff;padding:11px 24px;border-radius:50px;font-family:var(--sans);font-size:.84rem;font-weight:600;border:none;cursor:pointer;transition:background .18s,transform .18s;text-decoration:none}
+.btn-solid:hover{background:var(--navy-mid);transform:translateY(-1px)}
+.btn-line{display:inline-flex;align-items:center;gap:6px;background:transparent;color:var(--navy);padding:10px 22px;border-radius:50px;font-family:var(--sans);font-size:.84rem;font-weight:500;border:1.5px solid var(--rule);cursor:pointer;transition:all .18s;text-decoration:none}
+.btn-line:hover{border-color:var(--peach-dk);color:var(--peach-dk)}
+
+/* hero card */
+.hero-card{background:var(--navy);border-radius:20px;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(26,58,92,.25)}
+.hero-photo{width:100%;aspect-ratio:3/2.4;background:linear-gradient(135deg,#1A3A5C,#2C5282);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;position:relative;border-bottom:1px solid rgba(255,255,255,.1)}
+/* registration marks */
+.hero-photo::before,.hero-photo::after{content:'';position:absolute;width:18px;height:18px;border-color:rgba(255,191,155,.25);border-style:solid;pointer-events:none}
+.hero-photo::before{top:14px;left:14px;border-width:1px 0 0 1px}
+.hero-photo::after{bottom:14px;right:14px;border-width:0 1px 1px 0}
+.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.photo-hint{position:relative;z-index:1;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+.photo-hint p{font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);line-height:1.6}
+
+/* animated stat counters (improvement 5) */
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.08)}
+.hstat{padding:16px 10px;text-align:center;border-right:1px solid rgba(255,255,255,.08);position:relative}
+.hstat:last-child{border-right:none}
+.hstat-n{font-family:var(--serif);font-size:1.8rem;color:var(--peach);line-height:1;font-weight:700}
+.hstat-l{font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:3px;line-height:1.4}
+
+/* floating badges */
+.ab{position:absolute;display:flex;align-items:center;gap:6px;background:var(--white);border:1px solid var(--rule);border-radius:var(--r);padding:7px 11px;box-shadow:0 4px 16px rgba(0,0,0,.1);font-family:var(--mono);font-size:.58rem;letter-spacing:.05em;color:var(--ink2);white-space:nowrap}
+.ab .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.ab1{position:absolute;top:28px;right:-32px}
+.ab2{position:absolute;bottom:106px;right:-40px}
+
+/* ━━ MARQUEE ━━━━━━━━━━━━━━━━━━━━━━━━ */
+.mq{background:var(--navy);overflow:hidden;padding:11px 0;border-top:1px solid rgba(255,255,255,.05);white-space:nowrap}
+.mq-track{display:inline-flex;animation:mq 32s linear infinite}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mq-item{display:inline-flex;align-items:center;gap:16px;padding:0 22px;font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.mq-item span{color:var(--peach);font-size:.85rem}
+
+/* ━━ JD MATCH ━━━━━━━━━━━━━━━━━━━━━━━ */
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.match-intro p{font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.82;margin-bottom:1.2rem}
+.match-intro p strong{color:rgba(255,255,255,.88);font-weight:500}
+.match-list{display:flex;flex-direction:column;gap:9px}
+.mrow{display:flex;align-items:flex-start;gap:12px;padding:13px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;transition:all .18s}
+.mrow:hover{border-color:rgba(255,191,155,.35);background:rgba(255,191,155,.06)}
+.mico{font-size:.95rem;flex-shrink:0;margin-top:1px}
+.mreq{font-family:var(--mono);font-size:.57rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:3px}
+.mans{font-size:.83rem;color:rgba(255,255,255,.65);line-height:1.55}
+.mans strong{color:rgba(255,255,255,.9);font-weight:500}
+
+/* ━━ PROCESS FLOW ━━━━━━━━━━━━━━━━━━━ */
+.process-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;align-items:stretch;margin-top:2.8rem;border:1px solid var(--rule);border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(26,58,92,.07)}
+.pf-step{padding:1.75rem 1.4rem;border-right:1px solid var(--rule);position:relative;transition:background .2s}
+.pf-step:last-child{border-right:none}
+.pf-step:hover{background:var(--peach-bg)}
+.pf-num{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;color:var(--peach-dk);margin-bottom:.7rem;text-transform:uppercase}
+.pf-icon{font-size:1.5rem;margin-bottom:.65rem;display:block}
+.pf-label{font-family:var(--serif);font-size:.98rem;color:var(--navy);margin-bottom:.4rem;font-weight:600}
+.pf-desc{font-size:.74rem;color:var(--ink3);line-height:1.6}
+.pf-step:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-size:.75rem;color:var(--peach-dk);z-index:2;background:var(--white);padding:2px 0;line-height:1}
+
+/* ━━ ABOUT ━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:start}
+.about-body p{font-size:.95rem;color:var(--ink2);line-height:1.82;margin-bottom:1rem}
+.about-body p strong{color:var(--navy);font-weight:600}
+.skill-matrix{display:flex;flex-direction:column;gap:10px}
+.sm-grp{border:1px solid var(--rule);border-radius:var(--r);overflow:hidden;background:var(--white)}
+.sm-hd{background:var(--panel);padding:8px 13px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--rule)}
+.sm-ico{font-size:.82rem}
+.sm-ttl{font-family:var(--mono);font-size:.57rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);flex:1}
+.sm-cnt{font-family:var(--mono);font-size:.54rem;color:var(--ink3);background:var(--rule);padding:1px 6px;border-radius:50px}
+.sm-pills{padding:9px 13px;display:flex;flex-wrap:wrap;gap:5px}
+.sm-pill{font-size:.72rem;padding:3px 9px;border-radius:50px;background:var(--paper);border:1px solid var(--rule);color:var(--ink2);transition:all .15s}
+.sm-pill:hover{border-color:var(--navy);color:var(--navy)}
+
+/* ━━ EXPERIENCE (timeline, improvement 3) ━━ */
+.xp-list{position:relative;padding-left:2rem}
+/* vertical connector */
+.xp-list::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--peach),var(--navy-bg))}
+.xp-item{position:relative;padding:0 0 2.8rem 2rem}
+.xp-item:last-child{padding-bottom:0}
+/* node */
+.xp-item::before{content:'';position:absolute;left:-7px;top:6px;width:16px;height:16px;border-radius:50%;background:var(--white);border:3px solid var(--peach-dk);box-shadow:0 0 0 4px rgba(255,149,90,.15)}
+.xp-hd{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.4rem;margin-bottom:3px}
+.xp-org{font-family:var(--serif);font-size:1.15rem;color:#fff;letter-spacing:-.01em;font-weight:600}
+.xp-period{font-family:var(--mono);font-size:.57rem;color:rgba(255,255,255,.35);letter-spacing:.08em}
+.xp-role{font-size:.8rem;color:var(--peach);font-style:italic;margin-bottom:.9rem}
+.xp-pts{display:flex;flex-direction:column;gap:6px}
+.xp-pts li{font-size:.84rem;color:rgba(255,255,255,.55);padding-left:1rem;position:relative;line-height:1.65}
+.xp-pts li::before{content:'—';position:absolute;left:0;color:rgba(255,191,155,.5);font-size:.72rem}
+.xp-pts li strong{color:rgba(255,255,255,.88);font-weight:500}
+
+/* ━━ PROJECTS (colour coded, improvement 2) ━━ */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.pcard{background:var(--white);border:1px solid var(--rule);border-radius:10px;overflow:hidden;transition:transform .22s var(--ease),box-shadow .22s var(--ease),border-color .22s}
+.pcard:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(26,58,92,.12);border-color:var(--navy-lt)}
+.pthumb{height:165px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-bottom:1px solid var(--rule)}
+.pthumb::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(-55deg,transparent,transparent 10px,rgba(26,58,92,.03) 10px,rgba(26,58,92,.03) 11px)}
+.pthumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.pthumb-lbl{position:relative;z-index:2;font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);text-align:center;padding:0 1rem;line-height:1.7}
+/* colour coded top bar by category */
+.pcard[data-cat="fab"]   .pthumb{background:linear-gradient(135deg,var(--peach-bg),#fff)}
+.pcard[data-cat="elec"]  .pthumb{background:linear-gradient(135deg,var(--navy-bg),#fff)}
+.pcard[data-cat="res"]   .pthumb{background:linear-gradient(135deg,var(--sky-bg),#fff)}
+.pcard-bar{height:3px}
+.pcard[data-cat="fab"]  .pcard-bar{background:var(--peach-dk)}
+.pcard[data-cat="elec"] .pcard-bar{background:var(--navy)}
+.pcard[data-cat="res"]  .pcard-bar{background:var(--sky)}
+.pbody{padding:1.1rem 1.2rem}
+.ptype{font-family:var(--mono);font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px}
+.pcard[data-cat="fab"]  .ptype{color:var(--peach-dk)}
+.pcard[data-cat="elec"] .ptype{color:var(--navy)}
+.pcard[data-cat="res"]  .ptype{color:#2A7B9B}
+.pname{font-family:var(--serif);font-size:1rem;color:var(--ink);letter-spacing:-.01em;margin-bottom:5px;font-weight:600}
+.pdesc{font-size:.78rem;color:var(--ink3);line-height:1.65}
+
+/* ━━ GALLERY (lightbox, improvement 4) ━━ */
+.gal-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:200px;gap:10px}
+.gi{border-radius:8px;overflow:hidden;position:relative;background:#152D47;cursor:pointer}
+.gi.w8{grid-column:span 8} .gi.w4{grid-column:span 4} .gi.w6{grid-column:span 6}
+.gi.w3{grid-column:span 3} .gi.w5{grid-column:span 5} .gi.h2{grid-row:span 2}
+.gi img{width:100%;height:100%;object-fit:cover;transition:transform .45s var(--ease),filter .4s;filter:grayscale(10%)}
+.gi:hover img{transform:scale(1.05);filter:grayscale(0)}
+.gi-over{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,58,92,.85) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px;opacity:0;transition:opacity .25s}
+.gi:hover .gi-over{opacity:1}
+.gi-cap{font-family:var(--mono);font-size:.57rem;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.gi-zoom{position:absolute;top:10px;right:10px;width:28px;height:28px;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;font-size:.65rem;color:var(--navy)}
+.gi:hover .gi-zoom{opacity:1}
+.gi-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px}
+.gi-ph p{font-family:var(--mono);font-size:.53rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.2);text-align:center;padding:0 1rem;line-height:1.7}
+/* lightbox */
+.lb{display:none;position:fixed;inset:0;background:rgba(10,20,35,.95);z-index:9999;align-items:center;justify-content:center;padding:2rem}
+.lb.open{display:flex}
+.lb-inner{position:relative;max-width:900px;width:100%;max-height:90vh;display:flex;flex-direction:column;align-items:center;gap:1rem}
+.lb-img{max-height:80vh;max-width:100%;border-radius:10px;object-fit:contain}
+.lb-cap{font-family:var(--mono);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.lb-close{position:absolute;top:-2.5rem;right:0;background:transparent;border:none;color:rgba(255,255,255,.6);font-size:1.4rem;cursor:pointer;line-height:1;padding:4px}
+.lb-close:hover{color:#fff}
+
+/* ━━ ACHIEVEMENTS ━━━━━━━━━━━━━━━━━━━ */
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:13px}
+.acard{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:1.35rem 1.4rem;transition:all .18s;position:relative;overflow:hidden}
+.acard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--peach),var(--navy-bg));opacity:0;transition:opacity .2s}
+.acard:hover{border-color:rgba(26,58,92,.2);box-shadow:0 6px 24px rgba(26,58,92,.08);transform:translateY(-2px)}
+.acard:hover::before{opacity:1}
+.aemoji{font-size:1.4rem;display:block;margin-bottom:9px}
+.atitle{font-family:var(--serif);font-size:.96rem;color:var(--ink);margin-bottom:4px;font-weight:600}
+.abody{font-size:.78rem;color:var(--ink3);line-height:1.65}
+
+/* ━━ PUBLICATIONS ━━━━━━━━━━━━━━━━━━━ */
+.pub-list{display:flex;flex-direction:column;gap:9px}
+.pub-row{display:grid;grid-template-columns:62px 1fr;gap:1rem;align-items:start;background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:.95rem 1.2rem;transition:border-color .15s}
+.pub-row:hover{border-color:var(--navy-lt)}
+.pub-yr{font-family:var(--mono);font-size:.66rem;color:var(--peach-dk);letter-spacing:.06em;padding-top:2px}
+.pub-title{font-size:.87rem;font-weight:500;color:var(--ink);margin-bottom:2px}
+.pub-venue{font-size:.74rem;color:var(--ink3);font-style:italic;line-height:1.5}
+.pub-doi{font-family:var(--mono);font-size:.6rem;color:var(--navy-lt);margin-top:3px;display:block}
+
+/* ━━ CONTACT ━━━━━━━━━━━━━━━━━━━━━━━━ */
+.con-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(2rem,5vw,5rem);align-items:start}
+.con-intro p{font-size:.94rem;color:rgba(255,255,255,.52);line-height:1.82;margin-bottom:1.8rem}
+.clinks{display:flex;flex-direction:column;gap:7px}
+.clink{display:flex;align-items:center;gap:1rem;padding:11px 15px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:7px;transition:all .15s;text-decoration:none}
+.clink:hover{border-color:rgba(255,191,155,.35);background:rgba(255,191,155,.07)}
+.cl-lbl{font-family:var(--mono);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);width:50px;flex-shrink:0}
+.cl-val{font-size:.83rem;color:rgba(255,255,255,.68)}
+.cform{display:flex;flex-direction:column;gap:11px}
+.cform-row{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.cform-grp{display:flex;flex-direction:column;gap:4px}
+.cform-lbl{font-family:var(--mono);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.cform-input,.cform-ta{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:10px 14px;font-family:var(--sans);font-size:.87rem;color:#fff;outline:none;transition:all .15s}
+.cform-input:focus,.cform-ta:focus{border-color:rgba(255,191,155,.5);background:rgba(255,255,255,.09)}
+.cform-ta{resize:vertical;min-height:120px}
+::placeholder{color:rgba(255,255,255,.18)}
+.btn-send{display:inline-flex;align-items:center;gap:7px;background:var(--peach-dk);color:#fff;padding:11px 24px;border-radius:50px;font-family:var(--sans);font-size:.84rem;font-weight:600;border:none;cursor:pointer;align-self:flex-start;transition:all .18s;box-shadow:0 4px 16px rgba(232,149,90,.3)}
+.btn-send:hover{background:#d47840;transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,149,90,.4)}
+
+/* ━━ FOOTER ━━━━━━━━━━━━━━━━━━━━━━━━━ */
+footer{background:#0F2236;border-top:1px solid rgba(255,255,255,.06);padding:22px clamp(1.5rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+footer p{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;color:rgba(255,255,255,.22)}
+footer span{color:var(--peach)}
+
+/* ━━ REVEAL ━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.rev{opacity:0;transform:translateY(16px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.rev.in{opacity:1;transform:none}
+.rev[data-d="1"]{transition-delay:.07s}
+.rev[data-d="2"]{transition-delay:.14s}
+.rev[data-d="3"]{transition-delay:.21s}
+
+/* ━━ RESPONSIVE ━━━━━━━━━━━━━━━━━━━━━ */
+@media(max-width:900px){
+  .hero-inner,.about-grid,.con-grid,.match-grid{grid-template-columns:1fr;gap:2.5rem}
+  .xp-list{padding-left:1.5rem}
+  .process-flow{grid-template-columns:1fr 1fr}
+  .pf-step:nth-child(2n)::after{display:none}
+  .ab{display:none}
+  .gal-grid{grid-template-columns:1fr 1fr;grid-auto-rows:170px}
+  .gi.w8,.gi.w4,.gi.w6,.gi.w3,.gi.w5{grid-column:span 1}
+}
+@media(max-width:640px){
+  .nav-menu{display:none}
+  .hamburger{display:flex}
+  .cform-row{grid-template-columns:1fr}
+  .gal-grid{grid-template-columns:1fr}
+  .dock{right:10px;bottom:14px}
+  .process-flow{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .mq-track{animation:none}
+  .rev{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- progress bar -->
+<div id="progress-bar"></div>
+
+<!-- lightbox -->
+<div class="lb" id="lb" onclick="closeLB(event)">
+  <div class="lb-inner">
+    <button class="lb-close" onclick="closeLB()">✕</button>
+    <img class="lb-img" id="lb-img" src="" alt=""/>
+    <p class="lb-cap" id="lb-cap"></p>
+  </div>
+</div>
+
+<!-- DOCK -->
+<div class="dock">
+  <p class="dock-lbl">↓ Downloads</p>
+  <a class="dpill cv" href="Anand_kishor_CV.pdf" download>
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 6l3 3 3-3M1 11h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Résumé / CV
+  </a>
+  <a class="dpill cl" href="Anand_CoverLetter.pdf" download>
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 6l3 3 3-3M1 11h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Cover Letter
+  </a>
+  <a class="dpill pt" href="Anand_journey.pdf" download>
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 6l3 3 3-3M1 11h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Portfolio/ Anand Journey PDF
+  </a>
+</div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-brand">
+    <span class="nav-dot"></span>
+    <span class="nav-name">Anand Kishor Verma</span>
+    <span class="nav-tag">Maker Educator</span>
+  </div>
+  <div class="nav-right">
+    <ul class="nav-menu">
+      <li><a href="#match">Fit</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+        <li><a href="cover-letter.html">SOP</a></li>
+        <li><a href="cv.html">Resume</a></li>
+        
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hbg" onclick="toggleMob()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mob-menu" id="mob-menu">
+  <a href="#match" onclick="closeMob()">Why I Fit</a>
+  <a href="#about" onclick="closeMob()">About</a>
+  <a href="#experience" onclick="closeMob()">Experience</a>
+  <a href="#projects" onclick="closeMob()">Projects</a>
+  <a href="#gallery" onclick="closeMob()">Gallery</a>
+  <a href="#contact" onclick="closeMob()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-kicker"><span class="kicker-dot"></span>Applying — Masters' Union, Gurugram</div>
+      <h1 class="hero-h1">From first<br>sketch to<br><em>working thing.</em></h1>
+      <p class="hero-sub">6+ years designing and running maker education — Arduino, robotics, 3D printing, laser cutting, CNC. 500+ students taken from zero to prototype across India's top Fab Labs.</p>
+      <div class="hero-chips">
+        <span class="hchip">Arduino</span><span class="hchip">Robotics</span><span class="hchip">3D Printing</span>
+        <span class="hchip">Laser Cutting</span><span class="hchip">CNC Routing</span><span class="hchip">Electronics</span>
+        <span class="hchip p">MakerFaire Maker</span><span class="hchip s">AIM Mentor of Change</span>
+      </div>
+      <div class="hero-btns">
+        <a href="#match" class="btn-solid">Why I fit →</a>
+        <a href="#contact" class="btn-line">Get in touch</a>
+      </div>
+    </div>
+    <div style="position:relative">
+      <div class="hero-card">
+        <div class="hero-photo">
+          <!-- ADD PHOTO: <img src="images/anand.jpg" alt="Anand Kishor Verma" /> -->
+          <div class="photo-hint">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="16" r="9" stroke="rgba(255,191,155,.4)" stroke-width="1.5"/><path d="M4 40c0-9.941 8.059-18 18-18s18 8.059 18 18" stroke="rgba(255,191,155,.4)" stroke-width="1.5"/></svg>
+            <p>Add photo<br/>images/anand.jpg</p>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="hstat"><div class="hstat-n" data-target="6" data-suffix="+">0</div><div class="hstat-l">Yrs Fab Lab</div></div>
+          <div class="hstat"><div class="hstat-n" data-target="500" data-suffix="+">0</div><div class="hstat-l">Students Trained</div></div>
+          <div class="hstat"><div class="hstat-n" data-target="20" data-suffix="+">0</div><div class="hstat-l">Startups Mentored</div></div>
+        </div>
+      </div>
+      <div class="ab ab1"><span class="dot" style="background:var(--peach-dk)"></span>AIM Mentor of Change</div>
+      <div class="ab ab2"><span class="dot" style="background:var(--navy-lt)"></span>MakerFaire Recognized</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq" aria-hidden="true">
+  <div class="mq-track">
+    <span class="mq-item"><span>✦</span>Arduino</span><span class="mq-item"><span>✦</span>Robotics</span><span class="mq-item"><span>✦</span>3D Printing</span><span class="mq-item"><span>✦</span>Laser Cutting</span><span class="mq-item"><span>✦</span>CNC Router</span><span class="mq-item"><span>✦</span>Electronics</span><span class="mq-item"><span>✦</span>Rapid Prototyping</span><span class="mq-item"><span>✦</span>Design Thinking</span><span class="mq-item"><span>✦</span>Curriculum Design</span><span class="mq-item"><span>✦</span>Startup Mentorship</span><span class="mq-item"><span>✦</span>MakerFaire</span><span class="mq-item"><span>✦</span>Fab Lab</span>
+    <span class="mq-item"><span>✦</span>Arduino</span><span class="mq-item"><span>✦</span>Robotics</span><span class="mq-item"><span>✦</span>3D Printing</span><span class="mq-item"><span>✦</span>Laser Cutting</span><span class="mq-item"><span>✦</span>CNC Router</span><span class="mq-item"><span>✦</span>Electronics</span><span class="mq-item"><span>✦</span>Rapid Prototyping</span><span class="mq-item"><span>✦</span>Design Thinking</span><span class="mq-item"><span>✦</span>Curriculum Design</span><span class="mq-item"><span>✦</span>Startup Mentorship</span><span class="mq-item"><span>✦</span>MakerFaire</span><span class="mq-item"><span>✦</span>Fab Lab</span>
+  </div>
+</div>
+
+<!-- JD MATCH -->
+<section id="match" class="sec navy">
+  <div class="wrap">
+    <p class="eyebrow lt rev">Role Fit</p>
+    <h2 class="display lt rev">Why I'm the right fit<br>for <em>Masters' Union.</em></h2>
+    <br><br>
+    <div class="match-grid">
+      <div class="match-intro rev">
+        <p>Masters' Union needs a Maker Educator who can design immersive workshops, guide students from concept to prototype, and run Gurgaon's premier makerspace. <strong>This is exactly what I have done, at scale, for six years.</strong></p>
+        <p>Your institution has a Shark Tank India ecosystem of student founders. I've already mentored the kind of students who get there — one of my alumni startups from CMR University was <strong>featured on Shark Tank India Season 2.</strong></p>
+        <p>Every requirement in your JD maps directly to something I have done in the real world — not once, but repeatedly.</p>
+      </div>
+      <div class="match-list rev" data-d="1">
+        <div class="mrow"><span class="mico">⚡</span><div><p class="mreq">JD requires → Arduino, electronics, robotics</p><p class="mans">Trained <strong>500+ students and 50+ faculty</strong> in Arduino, Raspberry Pi, electronics, and robotics at Plaksha University.</p></div></div>
+        <div class="mrow"><span class="mico">🖨</span><div><p class="mreq">JD requires → 3D design and printing</p><p class="mans">Built GSLV/PSLV scale models, hovercraft prototypes, CNC-fabricated structures. Taught CAD and 3D printing for 6 years.</p></div></div>
+        <div class="mrow"><span class="mico">📋</span><div><p class="mreq">JD requires → Curriculum + training modules</p><p class="mans">Created end-to-end maker curricula, project kits, SOPs, and instructional guides used by <strong>2,000+ students annually.</strong></p></div></div>
+        <div class="mrow"><span class="mico">🚀</span><div><p class="mreq">JD requires → Concept to prototype lifecycle</p><p class="mans">Mentored <strong>100+ teams and 20+ startups</strong> through ideation, design, fabrication, and demo — one reached Shark Tank India.</p></div></div>
+        <div class="mrow"><span class="mico">🏭</span><div><p class="mreq">JD requires → Lab management and safety</p><p class="mans">Founded a <strong>5,000+ sq. ft Makerspace</strong> at Plaksha — 50+ machines, ₹5 Cr budget, full SOPs and safety protocols.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="sec white">
+  <div class="wrap">
+    <p class="eyebrow rev">How I Teach</p>
+    <h2 class="display rev">My maker education <em>process.</em></h2>
+    <div class="process-flow rev" data-d="1">
+      <div class="pf-step"><p class="pf-num">Step 01</p><span class="pf-icon">💡</span><p class="pf-label">Spark &amp; Ideate</p><p class="pf-desc">Brief with a real problem. Design thinking to generate and filter ideas.</p></div>
+      <div class="pf-step"><p class="pf-num">Step 02</p><span class="pf-icon">✏️</span><p class="pf-label">Sketch &amp; Plan</p><p class="pf-desc">CAD sketching, circuit planning, BOM and fabrication plan.</p></div>
+      <div class="pf-step"><p class="pf-num">Step 03</p><span class="pf-icon">🔧</span><p class="pf-label">Build &amp; Fabricate</p><p class="pf-desc">3D print, laser cut, solder, code Arduino/RPi. Students do the making.</p></div>
+      <div class="pf-step"><p class="pf-num">Step 04</p><span class="pf-icon">🔬</span><p class="pf-label">Test &amp; Iterate</p><p class="pf-desc">Debug, improve, refine. Failure is a data point. Iterate until it works.</p></div>
+      <div class="pf-step"><p class="pf-num">Step 05</p><span class="pf-icon">🎯</span><p class="pf-label">Present &amp; Scale</p><p class="pf-desc">Demo day, documentation, next steps — class project to potential startup.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="sec panel">
+  <div class="wrap">
+    <p class="eyebrow rev">About</p>
+    <div class="about-grid">
+      <div class="about-body">
+        <h2 class="display rev">Building the<br><em>culture</em> of making.</h2><br>
+        <p class="rev" data-d="1">I'm a <strong>Senior Makerspace Facilitator</strong> who has spent six years embedding maker culture inside Indian universities — making the space, the machines, and the mindset available to every student.</p>
+        <p class="rev" data-d="2">At <strong>Plaksha University</strong> I built a 5,000+ sq. ft Makerspace from nothing — procurement, SOPs, ₹5 Cr budget. At <strong>CMR University</strong> I launched a maker-startup ecosystem that mentored 20+ ventures, including one that appeared on <strong>Shark Tank India Season 2.</strong></p>
+        <p class="rev" data-d="3">Recognized <strong>Maker at MakerFaire</strong> and <strong>Mentor of Change</strong> by Atal Innovation Mission, NITI Aayog, Government of India. Completing M.Sc. in Built Environment &amp; Sustainability at Anant National University.</p>
+      </div>
+      <div class="skill-matrix rev" data-d="1">
+        <div class="sm-grp"><div class="sm-hd"><span class="sm-ico">⚡</span><span class="sm-ttl">Electronics &amp; Robotics</span><span class="sm-cnt">6</span></div><div class="sm-pills"><span class="sm-pill">Arduino</span><span class="sm-pill">Raspberry Pi</span><span class="sm-pill">Robotics</span><span class="sm-pill">Sensors</span><span class="sm-pill">Motor Control</span><span class="sm-pill">Electronics</span></div></div>
+        <div class="sm-grp"><div class="sm-hd"><span class="sm-ico">🖨</span><span class="sm-ttl">Fabrication Machines</span><span class="sm-cnt">5</span></div><div class="sm-pills"><span class="sm-pill">3D Printers</span><span class="sm-pill">Laser Cutters</span><span class="sm-pill">CNC Routers</span><span class="sm-pill">3D Scanners</span><span class="sm-pill">Electronics Kits</span></div></div>
+        <div class="sm-grp"><div class="sm-hd"><span class="sm-ico">💡</span><span class="sm-ttl">Design &amp; Method</span><span class="sm-cnt">5</span></div><div class="sm-pills"><span class="sm-pill">Design Thinking</span><span class="sm-pill">CAD</span><span class="sm-pill">MVP Development</span><span class="sm-pill">System Thinking</span><span class="sm-pill">Rapid Prototyping</span></div></div>
+        <div class="sm-grp"><div class="sm-hd"><span class="sm-ico">🎓</span><span class="sm-ttl">Teaching &amp; Program Design</span><span class="sm-cnt">4</span></div><div class="sm-pills"><span class="sm-pill">Curriculum Design</span><span class="sm-pill">Workshop Facilitation</span><span class="sm-pill">Project Kits</span><span class="sm-pill">SOP Development</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="sec navy">
+  <div class="wrap">
+    <p class="eyebrow lt rev">Experience</p>
+    <h2 class="display lt rev">Where I've <em>built</em> things.</h2>
+    <br><br>
+    <div class="xp-list">
+      <div class="xp-item rev">
+        <div class="xp-hd"><span class="xp-org">Plaksha University</span><span class="xp-period">Nov 2021 — Nov 2024 · Mohali</span></div>
+        <p class="xp-role">Senior Makerspace Facilitator</p>
+        <ul class="xp-pts">
+          <li>Founded and operationalized a <strong>5,000+ sq. ft Makerspace</strong> — procurement, SOP design, ₹5 Cr budget, 50+ machines.</li>
+          <li>Trained <strong>500+ students and 50+ faculty</strong> in 3D printing, laser cutting, Arduino, Raspberry Pi, robotics, and 3D scanning.</li>
+          <li>Led <strong>20+ outreach programs</strong> — school visits, YTS initiatives — impacting 1,000+ students.</li>
+          <li>Facilitated ILGC courses; mentored <strong>100+ students</strong> in Grand Challenge innovation programs.</li>
+          <li>Developed 10+ interactive demonstrations with the Centre of Excellence.</li>
+        </ul>
+      </div>
+      <div class="xp-item rev" data-d="1">
+        <div class="xp-hd"><span class="xp-org">CMR University</span><span class="xp-period">Mar 2017 — Apr 2019 · Bangalore</span></div>
+        <p class="xp-role">Makerspace Facilitator — FabLab@CMRIT</p>
+        <ul class="xp-pts">
+          <li>Launched <strong>Young Undergraduate Engineer Maker Program</strong> — hands-on fabrication for first-year students, <strong>2,000+ annually.</strong></li>
+          <li>Designed and delivered Arduino, 3D printing, CNC, and laser cutting curricula for 500+ students and 50+ faculty.</li>
+          <li>Built Maker startup ecosystem: mentored <strong>20+ startups;</strong> one featured on <strong>Shark Tank India Season 2.</strong></li>
+          <li>Organized Bangalore Design Week, Maker Something, and international events — <strong>1,000+ participants.</strong></li>
+        </ul>
+      </div>
+      <div class="xp-item rev" data-d="2">
+        <div class="xp-hd"><span class="xp-org">Agastya International Foundation</span><span class="xp-period">Jul 2015 — Apr 2016 · Kuppam</span></div>
+        <p class="xp-role">Mentor / Facilitator — Innovation Hub</p>
+        <ul class="xp-pts">
+          <li>Delivered hands-on STEM curriculum for <strong>grades 6–10 rural students,</strong> ~40 per batch.</li>
+          <li>Designed the Design Studio @ Innovation Hub — prototyping workflows, Fab Lab approval documentation.</li>
+          <li>Showcased student work to national and international delegates.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="sec white">
+  <div class="wrap">
+    <p class="eyebrow rev">Projects</p>
+    <h2 class="display rev">Things I've made <em>with my hands.</em></h2>
+    <br><br>
+    <div class="proj-grid">
+      <div class="pcard rev" data-cat="elec">
+        <div class="pcard-bar"></div>
+        <div class="pthumb"><div class="pthumb-lbl">🤖 images/ugv.jpg</div></div>
+        <div class="pbody"><p class="ptype">Robotics · Arduino · RPi</p><h3 class="pname">UGV — Unmanned Ground Vehicle</h3><p class="pdesc">Autonomous robot with integrated sensors, microcontrollers, and motor control. Full concept-to-demo build.</p></div>
+      </div>
+      <div class="pcard rev" data-cat="fab" data-d="1">
+        <div class="pcard-bar"></div>
+        <div class="pthumb"><div class="pthumb-lbl">🛸 images/gslv.jpg</div></div>
+        <div class="pbody"><p class="ptype">3D Printing · CAD</p><h3 class="pname">GSLV &amp; PSLV Scale Models (1:300)</h3><p class="pdesc">Modified open-source designs to create accurate prototypes of Indian launch vehicles for demonstration and education.</p></div>
+      </div>
+      <div class="pcard rev" data-cat="fab" data-d="2">
+        <div class="pcard-bar"></div>
+        <div class="pthumb"><div class="pthumb-lbl">🗼 images/eiffel.jpg</div></div>
+        <div class="pbody"><p class="ptype">Laser Cutting · CAD</p><h3 class="pname">Eiffel Tower Model (2 ft, MDF)</h3><p class="pdesc">Precision 2D CAD model laser-cut in MDF. Demonstrates structural design, tolerances, and assembly.</p></div>
+      </div>
+      <div class="pcard rev" data-cat="fab">
+        <div class="pcard-bar"></div>
+        <div class="pthumb"><div class="pthumb-lbl">💨 images/hovercraft.jpg</div></div>
+        <div class="pbody"><p class="ptype">3D Printing · Mechanical</p><h3 class="pname">Hovercraft Prototype</h3><p class="pdesc">CAD-designed, 3D-printed hovercraft demonstrating air-cushion mechanics and lightweight engineering.</p></div>
+      </div>
+      <div class="pcard rev" data-cat="elec" data-d="1">
+        <div class="pcard-bar"></div>
+        <div class="pthumb"><div class="pthumb-lbl">✈️ images/rc-aircraft.jpg</div></div>
+        <div class="pbody"><p class="ptype">Aerodynamics · Electronics</p><h3 class="pname">RC Aircraft Prototype</h3><p class="pdesc">Designed, built, and flight-tested. Integrates aerodynamics, motor control, and electronics.</p></div>
+      </div>
+      <div class="pcard rev" data-cat="res" data-d="2">
+        <div class="pcard-bar"></div>
+        <div class="pthumb"><div class="pthumb-lbl">🛩 images/bwb.jpg</div></div>
+        <div class="pbody"><p class="ptype">Aerospace · Research · Published</p><h3 class="pname">BWB MAV — Blended Wing Body</h3><p class="pdesc">Research-grade micro air vehicle. Published in IOP Conference Series 2018 and ICRAMAV 2014.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="sec navy">
+  <div class="wrap">
+    <p class="eyebrow lt rev">Gallery</p>
+    <h2 class="display lt rev">The work, <em>in pictures.</em></h2>
+    <br><br>
+    <!--
+      TO ADD PHOTOS: replace .gi-ph div with:
+        <img src="images/photo.jpg" alt="caption" onclick="openLB(this,'Caption text')" />
+        <div class="gi-over"><p class="gi-cap">Caption</p></div>
+        <div class="gi-zoom">⛶</div>
+    -->
+    <div class="gal-grid">
+      <div class="gi w8 h2 rev"><div class="gi-ph"><svg width="30" height="30" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" stroke="rgba(255,191,155,.2)" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="11" cy="12" r="4" stroke="rgba(255,191,155,.4)" stroke-width="1.5"/><path d="M2 24 L9 17 L15 22 L21 14 L30 24" stroke="rgba(255,191,155,.4)" stroke-width="1.5"/></svg><p>Main workshop photo<br/>images/workshop.jpg<br/>(large: w8 × h2)</p></div><div class="gi-over"><p class="gi-cap">Makerspace · Workshop Session</p></div><div class="gi-zoom">⛶</div></div>
+      <div class="gi w4 h2 rev" data-d="1"><div class="gi-ph"><svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" stroke="rgba(126,200,227,.25)" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="11" cy="12" r="4" stroke="rgba(126,200,227,.5)" stroke-width="1.5"/><path d="M2 24 L9 17 L15 22 L21 14 L30 24" stroke="rgba(126,200,227,.5)" stroke-width="1.5"/></svg><p>MakerFaire<br/>images/makerfaire.jpg</p></div><div class="gi-over"><p class="gi-cap">MakerFaire · Recognized Maker</p></div><div class="gi-zoom">⛶</div></div>
+      <div class="gi w3 rev" data-d="1"><div class="gi-ph"><svg width="24" height="24" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" stroke="rgba(255,191,155,.2)" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="11" cy="12" r="4" stroke="rgba(255,191,155,.4)" stroke-width="1.5"/><path d="M2 24 L9 17 L15 22 L21 14 L30 24" stroke="rgba(255,191,155,.4)" stroke-width="1.5"/></svg><p>3D Printing<br/>images/3dprint.jpg</p></div><div class="gi-over"><p class="gi-cap">3D Printing Session</p></div><div class="gi-zoom">⛶</div></div>
+      <div class="gi w3 rev" data-d="2"><div class="gi-ph"><svg width="24" height="24" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" stroke="rgba(126,200,227,.25)" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="11" cy="12" r="4" stroke="rgba(126,200,227,.5)" stroke-width="1.5"/><path d="M2 24 L9 17 L15 22 L21 14 L30 24" stroke="rgba(126,200,227,.5)" stroke-width="1.5"/></svg><p>Laser Cutter<br/>images/laser.jpg</p></div><div class="gi-over"><p class="gi-cap">Laser Cutter · CNC Work</p></div><div class="gi-zoom">⛶</div></div>
+      <div class="gi w3 rev" data-d="3"><div class="gi-ph"><svg width="24" height="24" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" stroke="rgba(255,191,155,.2)" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="11" cy="12" r="4" stroke="rgba(255,191,155,.4)" stroke-width="1.5"/><path d="M2 24 L9 17 L15 22 L21 14 L30 24" stroke="rgba(255,191,155,.4)" stroke-width="1.5"/></svg><p>Arduino / RPi<br/>images/electronics.jpg</p></div><div class="gi-over"><p class="gi-cap">Arduino · Electronics Lab</p></div><div class="gi-zoom">⛶</div></div>
+      <div class="gi w5 rev" data-d="1"><div class="gi-ph"><svg width="24" height="24" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" stroke="rgba(126,200,227,.25)" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="11" cy="12" r="4" stroke="rgba(126,200,227,.5)" stroke-width="1.5"/><path d="M2 24 L9 17 L15 22 L21 14 L30 24" stroke="rgba(126,200,227,.5)" stroke-width="1.5"/></svg><p>Demo day<br/>images/demoday.jpg</p></div><div class="gi-over"><p class="gi-cap">Demo Day · Grand Challenge</p></div><div class="gi-zoom">⛶</div></div>
+      <div class="gi w4 rev" data-d="2"><div class="gi-ph"><svg width="24" height="24" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="2" stroke="rgba(255,191,155,.2)" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="11" cy="12" r="4" stroke="rgba(255,191,155,.4)" stroke-width="1.5"/><path d="M2 24 L9 17 L15 22 L21 14 L30 24" stroke="rgba(255,191,155,.4)" stroke-width="1.5"/></svg><p>Outreach<br/>images/outreach.jpg</p></div><div class="gi-over"><p class="gi-cap">Outreach · 1,000+ Students</p></div><div class="gi-zoom">⛶</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="sec white">
+  <div class="wrap">
+    <p class="eyebrow rev">Recognition</p>
+    <h2 class="display rev">Awards &amp; <em>Achievements.</em></h2>
+    <br><br>
+    <div class="ach-grid">
+      <div class="acard rev"><span class="aemoji">🏆</span><p class="atitle">Mentor of Change — AIM, NITI Aayog</p><p class="abody">Recognized by Atal Innovation Mission, Government of India since 2018 for mentoring student innovators and national entrepreneurship.</p></div>
+      <div class="acard rev" data-d="1"><span class="aemoji">🚀</span><p class="atitle">Recognized Maker — MakerFaire</p><p class="abody">Active exhibitor and participant at MakerFaire events, showcasing fabrication projects and contributing to the global Maker movement.</p></div>
+      <div class="acard rev" data-d="2"><span class="aemoji">🛰️</span><p class="atitle">NASA Scientist Appreciation</p><p class="abody">Appreciated at the High School Teacher Training Program, Space Festival, Bharathiar University. Received 100 Spectrograph kit.</p></div>
+      <div class="acard rev"><span class="aemoji">💡</span><p class="atitle">NASSCOM Tech-Maker Under 50</p><p class="abody">Acknowledged as NASSCOM Tech-Maker Under 50 and U25 startup category for innovation and maker contributions.</p></div>
+      <div class="acard rev" data-d="1"><span class="aemoji">📺</span><p class="atitle">Shark Tank India — Startup Mentor</p><p class="abody">Provided early-stage prototyping support to an alumni startup later featured on Shark Tank India Season 2.</p></div>
+      <div class="acard rev" data-d="2"><span class="aemoji">🌾</span><p class="atitle">ANVESHNA 2015 — Drone Demo</p><p class="abody">Demonstrated unmanned sustainable platform for crop monitoring, surveillance, and reconnaissance at national level.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications" class="sec panel">
+  <div class="wrap">
+    <p class="eyebrow rev">Research</p>
+    <h2 class="display rev">Publications.</h2>
+    <br><br>
+    <div class="pub-list">
+      <div class="pub-row rev"><p class="pub-yr">2018</p><div><p class="pub-title">Challenge and Advantage of Materials in Design and Fabrication of Composite UAV</p><p class="pub-venue">IOP Conf. Ser.: Materials Science and Engineering, Vol. 455, 012005</p><a class="pub-doi" href="https://doi.org/10.1088/1757-899X/455/1/012005" target="_blank">doi.org/10.1088/1757-899X/455/1/012005</a></div></div>
+      <div class="pub-row rev" data-d="1"><p class="pub-yr">2014</p><div><p class="pub-title">Design and Fabrication of BWB MAV</p><p class="pub-venue">ICRAMAV — 3rd Intl. Conference on Micro Air Vehicles, JNT University Hyderabad · ISBN: 9789351071693</p></div></div>
+      <div class="pub-row rev" data-d="2"><p class="pub-yr">2015</p><div><p class="pub-title">Design and Fabrication of BWB</p><p class="pub-venue">ISC2015 Proceedings, Amity University Press · ISBN: 978-81-8011-2232</p></div></div>
+      <div class="pub-row rev"><p class="pub-yr">2013</p><div><p class="pub-title">Inter Liking River Project</p><p class="pub-venue">Conference Proceeding Book, GSS College, Belgaum</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="sec navy">
+  <div class="wrap">
+    <p class="eyebrow lt rev">Contact</p>
+    <h2 class="display lt rev">Let's build<br><em>something</em> together.</h2>
+    <br><br>
+    <div class="con-grid">
+      <div class="con-intro rev">
+        <p>Applying for the Maker Educator role at Masters' Union, Gurugram. Open to relocating from Ahmedabad. Available for a call, lab visit, or demo session at short notice.</p>
+        <div class="clinks">
+          <a class="clink" href="mailto:anand.verma.msbe24@anu.edu.in"><span class="cl-lbl">Email</span><span class="cl-val">anand.verma.msbe24@anu.edu.in</span></a>
+          <a class="clink" href="tel:+919035756213"><span class="cl-lbl">Phone</span><span class="cl-val">+91-9035756213</span></a>
+          <a class="clink" href="https://linkedin.com/in/anandkishorverma" target="_blank"><span class="cl-lbl">LinkedIn</span><span class="cl-val">linkedin.com/in/anandkishorverma</span></a>
+          <div class="clink"><span class="cl-lbl">Location</span><span class="cl-val">Ahmedabad → open to Gurugram</span></div>
+        </div>
+      </div>
+      <form class="cform rev" data-d="1" onsubmit="doMail(event)">
+        <div class="cform-row">
+          <div class="cform-grp"><label class="cform-lbl">Name</label><input class="cform-input" type="text" name="n" placeholder="Your name" required/></div>
+          <div class="cform-grp"><label class="cform-lbl">Email</label><input class="cform-input" type="email" name="e" placeholder="your@email.com" required/></div>
+        </div>
+        <div class="cform-grp"><label class="cform-lbl">Organisation</label><input class="cform-input" type="text" name="o" placeholder="Masters' Union / other"/></div>
+        <div class="cform-grp"><label class="cform-lbl">Message</label><textarea class="cform-ta" name="m" placeholder="Tell me about the role or next steps…" required></textarea></div>
+        <button type="submit" class="btn-send">Send message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <span>Anand Kishor Verma</span> — Maker Educator &amp; Makerspace Lead</p>
+  <p>Place PDFs + images/ folder beside <span>index.html</span></p>
+</footer>
+
+<script>
+/* ── scroll progress ── */
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  document.getElementById('progress-bar').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+},{passive:true});
+
+/* ── reveal ── */
+const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.07});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+
+/* ── stat counters ── */
+const counterIO=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const el=entry.target;
+      const target=+el.dataset.target, suffix=el.dataset.suffix||'';
+      let cur=0; const step=target/40;
+      const t=setInterval(()=>{cur=Math.min(cur+step,target);el.textContent=Math.round(cur)+suffix;if(cur>=target)clearInterval(t)},40);
+      counterIO.unobserve(el);
+    }
+  });
+},{threshold:.5});
+document.querySelectorAll('.hstat-n[data-target]').forEach(el=>counterIO.observe(el));
+
+/* ── nav active ── */
+const secs=document.querySelectorAll('section[id]'),links=document.querySelectorAll('.nav-menu a');
+window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(scrollY>=s.offsetTop-70)c=s.id});links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+c))},{passive:true});
+
+/* ── hamburger ── */
+function toggleMob(){document.getElementById('mob-menu').classList.toggle('open')}
+function closeMob(){document.getElementById('mob-menu').classList.remove('open')}
+
+/* ── lightbox ── */
+function openLB(img,cap){
+  document.getElementById('lb-img').src=img.src;
+  document.getElementById('lb-cap').textContent=cap;
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLB(e){
+  if(!e||e.target===document.getElementById('lb')||e.currentTarget===document.querySelector('.lb-close')){
+    document.getElementById('lb').classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLB()});
+
+/* ── mail ── */
+function doMail(e){e.preventDefault();const f=e.target;window.location.href=`mailto:anand.verma.msbe24@anu.edu.in?subject=${encodeURIComponent(f.o?.value?'Re: Maker Educator — '+f.o.value:'Portfolio Inquiry')}&body=${encodeURIComponent('From: '+f.n.value+' ('+f.e.value+')\n\n'+f.m.value)}`}
+</script>
+</body>
+</html>
